@@ -1,11 +1,12 @@
-.wrapper__title {
-    text-align: center;
-    color: blue;
-}
-
 .App {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    font-family: 'JetBrains Mono';
+}
+
+.wrapper__title {
+    color: blue;
+    text-align: center;
 }
