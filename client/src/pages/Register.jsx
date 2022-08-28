@@ -1,19 +1,16 @@
-
-import React, { useState } from "react";
 import Axios from 'axios'
+import React, { useState } from "react";
 
 function Register() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    async function registerUser(e) {
-        e.preventDefault()
-        Axios.post('http://localhost:5000/api/register', { name, email, password }).then(response => {
-          console.log(response)
-        }).catch(error => {
-          console.log(error);
-        })
+    const registerUser = (e) => {
+      e.preventDefault()
+
+      Axios.post('http://localhost:5000/api/register', {name, email, password}).then(res => console.log(res))
+      .catch(err => console.log(err))
     }
 
     return (

@@ -15,27 +15,32 @@ const PORT = 5000 || process.env.PORT
 mongoose.connect('mongodb+srv://AnassELH7:ansx142@mern-cluster.vrzmoko.mongodb.net/mern-db?retryWrites=true&w=majority')
 
 app.post('/api/register', async(req, res) => {
-    console.log(req.body);
+    const { name, email, password } = req.body
+
     try {
         await User.create({
-            name: req.body.name,
-            email: req.body.email,
-            password: req.body.password
+            name,
+            email,
+            password
         })
 
         res.json({ status: "ok" })
+        console.log('ok in register')
     } catch {
-        res.json({ status: "something went wrong" })
+
+        if (!name || !email || !password) console.log('credentials not complete')
+        else console.log('You used the same email')
+
     }
 })
 
 app.post('/api/login', async(req, res) => {
-    console.log(req.body);
+    const { name, email, password } = req.body
     try {
         const user = await User.findOne({
-            name: req.body.name,
-            email: req.body.email,
-            password: req.body.password
+            name,
+            email,
+            password
         })
 
         if (user) {
@@ -45,7 +50,7 @@ app.post('/api/login', async(req, res) => {
         }
 
     } catch {
-        console.log('Something went wrong');
+        res.json({ status: "error", error: "Crendentials are not complete" })
     }
 })
 
